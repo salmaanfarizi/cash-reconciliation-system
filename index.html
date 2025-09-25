@@ -780,10 +780,10 @@ if ('serviceWorker' in navigator) {
   <div id="loadingOverlay" class="loading-overlay hidden">
     <div class="loading-spinner"></div>
   </div>
-
-  <script>
-    // Enhanced Cash Reconciliation App with robust error handling
-    class CashReconciliationApp {
+<script src="config.js"></script>
+<script>
+  // Enhanced Cash Reconciliation App with robust error handling
+  class CashReconciliationApp {
     constructor() {
         // Configuration from external config.js
         this.WEBHOOK_URL = CONFIG.GOOGLE_SCRIPT_URL;
@@ -1515,36 +1515,36 @@ if ('serviceWorker' in navigator) {
     // Initialize app
     const app = new CashReconciliationApp();
     document.addEventListener('DOMContentLoaded', () => app.init());
-    </script>
-    src="config.js">
-    </script>
-    <script>
-// Performance monitoring
-window.addEventListener('load', () => {
-    const perfData = window.performance.timing;
-    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-    console.log('Page load time:', pageLoadTime + 'ms');
-    
-    // Send to analytics if needed
-    if (pageLoadTime > 3000) {
+   
+    document.addEventListener('DOMContentLoaded', () => app.init());
+  </script>
+  <script>
+    // Performance monitoring
+    window.addEventListener('load', () => {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log('Page load time:', pageLoadTime + 'ms');
+      
+      // Send to analytics if needed
+      if (pageLoadTime > 3000) {
         console.warn('Slow page load detected');
-    }
-});
+      }
+    });
 
-// Monitor API calls
-const originalFetch = window.fetch;
-window.fetch = async function(...args) {
-    const startTime = performance.now();
-    try {
+    // Monitor API calls
+    const originalFetch = window.fetch;
+    window.fetch = async function(...args) {
+      const startTime = performance.now();
+      try {
         const response = await originalFetch.apply(this, args);
         const endTime = performance.now();
         console.log(`API call took ${endTime - startTime}ms`);
         return response;
-    } catch (error) {
+      } catch (error) {
         console.error('API call failed:', error);
         throw error;
-    }
-};
-</script>
+      }
+    };
+  </script>
 </body>
 </html>
